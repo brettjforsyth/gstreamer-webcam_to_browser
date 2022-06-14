@@ -170,33 +170,32 @@ class MainPipeline():
         Gst.init(None)
 
         self.pipeline = Gst.Pipeline.new("framegrabber")
+        # gst-launch-1.0 -v tcpclientsrc host=xxx.xxx.xxx.xxx port=5001 ! decodebin ! fpsdisplaysink sync=false text-overlay=false
 
         # instantiate the camera source
-        self.videosrc = Gst.ElementFactory.make("v4l2src", "vid-src")
-        self.videosrc.set_property("device", "/dev/video0")
+        self.videosrc = Gst.ElementFactory.make("tcpclientsrc", "vid-src")
+        self.videosrc.set_property("host", "192.168.0.112")
+        self.videosrc.set_property("port", "5001")
 
         # instantiate the jpeg parser to ensure whole frames
-        self.videoparse = Gst.ElementFactory.make("jpegparse", "vid-parse")
+        self.videodecode = Gst.ElementFactory.make("decodebin")
 
         # instantiate the appsink - allows access to raw frame data
-        self.videosink = Gst.ElementFactory.make("appsink", "vid-sink")
-        self.videosink.set_property("max-buffers", 3)
-        self.videosink.set_property("drop", True)
-        self.videosink.set_property("emit-signals", True)
+        self.videosink = Gst.ElementFactory.make("fpsdisplaysink", "vid-sink")
         self.videosink.set_property("sync", False)
-        self.videosink.connect("new-sample", self.pull_frame)
+        self.videosink.set_property("text-overlay", False)
 
         # add all the new elements to the pipeline
         print("Adding Elements to Pipeline")
         self.pipeline.add(self.videosrc)
-        self.pipeline.add(self.videoparse)
+        self.pipeline.add(self.videodecode)
         self.pipeline.add(self.videosink)
 
         # link the elements in order, adding a filter to ensure correct size and framerate
         print("Linking GST Elements")
-        self.videosrc.link_filtered(self.videoparse,
-            Gst.caps_from_string('image/jpeg,width=640,height=480,framerate=30/1'))
-        self.videoparse.link(self.videosink)
+        # self.videosrc.link_filtered(self.videoparse,
+        #     Gst.caps_from_string('image/jpeg,width=640,height=480,framerate=30/1'))
+        # self.videoparse.link(self.videosink)
 
         # start the video
         print("Setting Pipeline State")
@@ -217,7 +216,7 @@ def signal_handler(signum, frame):
 
 if __name__ == "__main__":
 
-    init_motors()
+    #init_motors()
 
     cam_app = tornado.web.Application([
         (r'/ws', CamWSHandler),
