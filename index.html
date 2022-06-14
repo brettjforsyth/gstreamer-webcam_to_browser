@@ -8,19 +8,22 @@
 
   var ip = location.host;
   var CamUri = "ws://" + ip + "/ws";
-  var KeyUri = "ws://" + ip.replace("8888", "8889") + "/ws";
+  var KeyUri = "ws://" + ip.replace("8888") + "/ws";
   var output;
   var cam_socket;
   var key_socket;
-  var img;
+  var vid;
 
   function init()
   {
     output = document.getElementById("output");
-    img = document.createElement("img");
-    img.height = 360;
-    img.src = "";
-    output.appendChild(img);
+    vid = document.createElement("video");
+    vid_src = document.createElement("source");
+    vid.width = 1280;
+    vid.height = 720;
+    vid_src.src = CamUri;
+    vid.appendChild(vid_src)
+    output.appendChild(vid);
     testWebSocket();
     window.setTimeout(sendCommandVector, 1000);
   }
@@ -40,7 +43,7 @@
     cam_socket = new WebSocket(CamUri);
     cam_socket.onopen = function(evt) { onOpen(evt) };
     cam_socket.onclose = function(evt) { onClose(evt) };
-    cam_socket.onmessage = function(evt) { onMessage(evt) };
+    //cam_socket.onmessage = function(evt) { onMessage(evt) };
     cam_socket.onerror = function(evt) { onError(evt) };
 
     key_socket = new WebSocket(KeyUri);
