@@ -204,14 +204,14 @@ class MainPipeline():
 
 def start_server(cam_app, key_app):
     cam_server = tornado.httpserver.HTTPServer(cam_app)
-    key_server = tornado.httpserver.HTTPServer(key_app)
+    #key_server = tornado.httpserver.HTTPServer(key_app)
     cam_server.listen(8888)
-    key_server.listen(8889)
-    tornado.ioloop.IOLoop.instance().start()
+    #key_server.listen(8889)
+    tornado.ioloop.IOLoop.current().start()
 
 def signal_handler(signum, frame):
     print("Interrupt caught")
-    tornado.ioloop.IOLoop.instance().stop()
+    tornado.ioloop.IOLoop.current().stop()
     server_thread.stop()
 
 if __name__ == "__main__":
@@ -223,10 +223,11 @@ if __name__ == "__main__":
         (r'/', HTTPServer),
     ])
 
-    key_app = tornado.web.Application([
-        (r'/ws', KeyWSHandler)
-    ])
+    #key_app = tornado.web.Application([
+    #    (r'/ws', KeyWSHandler)
+    #])
 
+   
 
     print("Starting GST thread...")
 
@@ -239,7 +240,8 @@ if __name__ == "__main__":
     print("starting frame grabber thread")
 
     print("Starting server thread")
-    server_thread = threading.Thread(target=start_server, args=[cam_app, key_app])
+    #server_thread = threading.Thread(target=start_server, args=[cam_app, key_app])
+    server_thread = threading.Thread(target=start_server, args=[cam_app])
     server_thread.start()
 
     # or you can use a custom handler,
