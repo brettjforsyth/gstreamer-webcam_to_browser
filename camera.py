@@ -23,7 +23,12 @@ def post(self):
 
     elif self.get_argument('advanced', None) is not None:
         self.write('Advanced Query')
-        
+def start_server(cam_app):
+    cam_server = tornado.httpserver.HTTPServer(cam_app)
+    #key_server = tornado.httpserver.HTTPServer(key_app)
+    cam_server.listen(8888)
+    #key_server.listen(8889)
+    tornado.ioloop.IOLoop.current().start()
 if __name__ == "__main__":
 
     #init_motors()
@@ -31,5 +36,6 @@ if __name__ == "__main__":
     cam_app = tornado.web.Application([
         (r'/', HTTPServer),
     ])
+    start_server(cam_app)
     time.sleep(1)
 
