@@ -31,6 +31,7 @@
     // output.appendChild(vid);
     //testWebSocket();
     //window.setTimeout(sendCommandVector, 1000);
+    console.log('init')
     updateImage();
   }
 
@@ -104,11 +105,12 @@
 
   function updateImage()
   {
+      console.log('update image')
       reloadImg('preview.jpg')
 
       setTimeout(updateImage, 1000);
   }
-
+  updateImage();
   window.addEventListener("load", init, false);
  
 </script>
