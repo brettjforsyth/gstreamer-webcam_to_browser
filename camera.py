@@ -35,8 +35,7 @@ if __name__ == "__main__":
     #init_motors()
 
     cam_app = tornado.web.Application([
-        (r'/', HTTPServer),
-        url(r"/photos/(.*)", MyPhotoHandler),
+        (r'/', HTTPServer),       
     ])
     start_server(cam_app)
 
