@@ -23,7 +23,25 @@ def post(self):
 
     elif self.get_argument('advanced', None) is not None:
         self.write('Advanced Query')
-        
+
+class CamWSHandler(tornado.websocket.WebSocketHandler):
+    def open(self):
+        global cam_sockets
+        cam_sockets.append(self)
+        print('new camera connection')
+
+    def on_message(self, message):
+        print (message)
+
+    def on_close(self):
+        global cam_sockets
+        cam_sockets.remove(self)
+        print('camera connection closed')
+
+    def check_origin(self, origin):
+        return True
+
+
 def start_server(cam_app):
     cam_server = tornado.httpserver.HTTPServer(cam_app)
     
@@ -36,6 +54,7 @@ if __name__ == "__main__":
     #init_motors()
 
     cam_app = tornado.web.Application([
+        (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
         (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'})       
     ])
