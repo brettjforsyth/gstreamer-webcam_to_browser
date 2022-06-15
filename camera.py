@@ -11,7 +11,11 @@ from gi.repository import Gst, GObject
 import json
 import signal
 
+cam_sockets = []
 
+def send_all(msg):
+    for ws in cam_sockets:
+        ws.write_message(msg, True)
 
 class HTTPServer(tornado.web.RequestHandler):
     def get(self):
