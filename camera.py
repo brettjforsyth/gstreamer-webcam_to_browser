@@ -1,16 +1,35 @@
-import tornado.ioloop
-import tornado.web
+import tornado
+import tornado.websocket
+import tornado.httpserver
+import threading
+import time
+import base64
+import sys, os
+import gi
+gi.require_version('Gst', '1.0')
+from gi.repository import Gst, GObject
+import json
+import signal
 
-class MainHandler(tornado.web.RequestHandler):
+
+
+class HTTPServer(tornado.web.RequestHandler):
     def get(self):
-        self.write("Hello, world")
+        self.render("index.html")
 
-def make_app():
-    return tornado.web.Application([
-        (r"/", MainHandler),
-    ])
+def post(self):
+    if self.get_argument('basic', None) is not None:
+        self.write('Basic Query')
 
+    elif self.get_argument('advanced', None) is not None:
+        self.write('Advanced Query')
+        
 if __name__ == "__main__":
-    app = make_app()
-    app.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
+
+    #init_motors()
+
+    cam_app = tornado.web.Application([
+        (r'/', HTTPServer),
+    ])
+    time.sleep(1)
+

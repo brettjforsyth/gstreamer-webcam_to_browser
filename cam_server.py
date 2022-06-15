@@ -241,9 +241,9 @@ if __name__ == "__main__":
 
     print("Starting server thread")
     #server_thread = threading.Thread(target=start_server, args=[cam_app, key_app])
-    server_thread = threading.Thread(target=start_server, args=[cam_app])
-    server_thread.start()
-
+    #server_thread = threading.Thread(target=start_server, args=[cam_app])
+    #server_thread.start()
+    start_server(cam_app)
     # or you can use a custom handler,
     # in which case recv will fail with EINTR
     print("registering sigint")
