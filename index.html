@@ -53,9 +53,9 @@
       console.log("SENDING");
       if(size == 0){
         size = 1
-        cam_socket.send(JSON.stringify('large'));
+        cam_socket.send('large');
       }else{
-        cam_socket.send(JSON.stringify('small'));
+        cam_socket.send('small');
         size = 0
       }
     }else {
