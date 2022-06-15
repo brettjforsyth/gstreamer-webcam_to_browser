@@ -27,13 +27,14 @@
       //console.log('fetch ', response)
       //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
       document.getElementById("preview").src=response.url+"?d="+Date.now();
-      if(size == 0){
-          size = 1
-          sendCommand('large');
-        }else{
-          sendCommand('small');
-          size = 0
-        }
+      // if(size == 0){
+      //     size = 1
+      //     sendCommand('large');
+      //   }else{
+      //     sendCommand('small');
+      //     size = 0
+      //   }
+      sendCommand('small');
     }
     )
 
@@ -59,12 +60,14 @@
           updateImage()
         }else{
           preview_on = false
+          document.getElementById("preview_btn").innerHTML = "Start Preview"
         }
       };
       document.getElementById("capture_btn").onclick = function(){
-      sendCommand('capture_raw')
+        sendCommand('capture_raw')
       };
       testWebSocket();
+      sendCommand('small');
       console.log('init')
       
     }
@@ -152,10 +155,9 @@
   </script>
 </head>
 <body>
-<h2>WebSocket Test</h2>
-<p><a class="button" href="#" id="preview_btn">Start Preview</a></p>
-<p><a class="button" href="#" id="capture_btn">Capture RAW Image</a></p>
-<div id="output"><img id="preview" src=""/></div>
+  <div id="output"><img id="preview" src=""/></div>
+<p><a class="button" href="#" id="preview_btn">Start Preview</a> <a class="button" href="#" id="capture_btn">Capture RAW Image</a></p>
+
 </body>
 
 </html>
