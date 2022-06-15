@@ -18,7 +18,8 @@
   fetch(url, { cache: 'reload', mode: 'no-cors' })
   .then(response => {
     console.log('fetch ', response)
-    document.body.querySelectorAll(`img[src='${url}']`).forEach(img => img.src = url)
+    //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
+    document.getElementById("preview").src=response.url;
   }
   )
 
