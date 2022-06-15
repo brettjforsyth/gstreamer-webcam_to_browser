@@ -18,7 +18,7 @@
     let loaded = true
     let size  = 0
     // ws.onmessage = function(evt){
-    let preview_on = false
+    var preview_on = false
 
 
     const reloadImg = url =>
@@ -51,7 +51,9 @@
       
       //window.setTimeout(sendCommandVector, 1000);
       document.getElementById("preview_btn").onclick = function(){
+       
         if(!preview_on){
+          console.log('start preview')
           preview_on = true
           document.getElementById("preview_btn").innerHTML = "Stop Preview"
           updateImage()
