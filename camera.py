@@ -35,7 +35,8 @@ if __name__ == "__main__":
     #init_motors()
 
     cam_app = tornado.web.Application([
-        (r'/', HTTPServer),       
+        (r'/', HTTPServer),
+        (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'})       
     ])
     start_server(cam_app)
 
