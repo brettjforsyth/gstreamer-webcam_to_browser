@@ -45,7 +45,7 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
-            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+number_files+'.dng -r -n --immediate')
+            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --immediate')
         send_all(str('image captured'))
 
     def on_close(self):
