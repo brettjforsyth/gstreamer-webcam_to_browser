@@ -19,7 +19,7 @@
   .then(response => {
     console.log('fetch ', response)
     //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
-    document.getElementById("preview").src=response.url;
+    document.getElementById("preview").src=response.url+"?d="+Date.now();
     loaded = true
   }
   )
