@@ -13,14 +13,14 @@
   //var cam_socket;
   //var key_socket;
   //var vid;
-
+  let loaded = false
   const reloadImg = url =>
   fetch(url, { cache: 'reload', mode: 'no-cors' })
   .then(response => {
     console.log('fetch ', response)
     //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
     document.getElementById("preview").src=response.url;
-    updateImage();
+    loaded = true
   }
   )
 
@@ -111,9 +111,12 @@
   function updateImage()
   {
       //console.log('update image')
-      reloadImg('preview.jpg')
+      if(loaded){
+        loaded = false
+        reloadImg('preview.jpg')
+      }
 
-      //setTimeout(updateImage, 1000);
+      setTimeout(updateImage, 1000);
   }
   updateImage();
   window.addEventListener("load", init, false);
