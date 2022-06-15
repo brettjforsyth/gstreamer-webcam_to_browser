@@ -36,7 +36,7 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         print (message)
-        if message == 'large':
+        if str(message) == 'large':
             print('large capture')
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview2.jpg --width 640 --height 480 -n --immediate')
         else:
