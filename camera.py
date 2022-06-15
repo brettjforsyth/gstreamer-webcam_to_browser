@@ -36,7 +36,8 @@ if __name__ == "__main__":
 
     cam_app = tornado.web.Application([
         (r'/', HTTPServer),
+        url(r"/photos/(.*)", MyPhotoHandler),
     ])
     start_server(cam_app)
-    
+
     time.sleep(1)
