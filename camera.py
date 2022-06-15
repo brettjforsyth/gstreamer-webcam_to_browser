@@ -36,7 +36,10 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         print (message)
-
+        if message == 'large':
+            os.system('libcamera-still -o preview.jpg --width 640 --height 480 -n --immediate')
+        else:
+            os.system('libcamera-still -o preview.jpg --width 320 --height 240 -n --immediate')
     def on_close(self):
         global cam_sockets
         cam_sockets.remove(self)
