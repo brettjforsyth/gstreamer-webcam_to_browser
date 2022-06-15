@@ -43,7 +43,7 @@
     testWebSocket();
     //window.setTimeout(sendCommandVector, 1000);
     //console.log('init')
-    updateImage();
+    
   }
 
   function sendCommand() {
@@ -93,6 +93,7 @@
   function onOpen(evt)
   {
     writeToScreen("WS CONNECTED");
+    updateImage();
   }
 
   function onClose(evt)
