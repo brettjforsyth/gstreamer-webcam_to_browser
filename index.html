@@ -50,6 +50,18 @@
       // output.appendChild(vid);
       
       //window.setTimeout(sendCommandVector, 1000);
+      document.getElementById("preview_btn").onclick = function(){
+        if(!preview_on){
+          preview_on = true
+          document.getElementById("preview_btn").innerHTML = "Stop Preview"
+          updateImage()
+        }else{
+          preview_on = false
+        }
+      };
+      document.getElementById("capture_btn").onclick = function(){
+      sendCommand('capture_raw')
+      };
       testWebSocket();
       console.log('init')
       
@@ -130,18 +142,7 @@
     {
         reloadImg('preview.jpg')
     }
-    document.getElementById("preview_btn").onclick = function(){
-      if(!preview_on){
-        preview_on = true
-        document.getElementById("preview_btn").innerHTML = "Stop Preview"
-        updateImage()
-      }else{
-        preview_on = false
-      }
-    };
-    document.getElementById("capture_btn").onclick = function(){
-     sendCommand('capture_raw')
-    };
+   
 
     
     window.addEventListener("load", init, false);
