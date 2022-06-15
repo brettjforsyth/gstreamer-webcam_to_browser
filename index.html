@@ -43,6 +43,7 @@
     // output.appendChild(vid);
     
     //window.setTimeout(sendCommandVector, 1000);
+    updateImage()
     console.log('init')
     
   }
@@ -113,7 +114,7 @@
     // img.onload = function(e) {
     //     window.URL.revokeObjectURL(this.imageURL);
     // }
-
+    updateImage()  
     console.log(evt);
   }
 
@@ -137,8 +138,6 @@
         loaded = false
         reloadImg('preview.jpg')
       }
-
-      setTimeout(updateImage, 5000);
   }
   testWebSocket();
   window.addEventListener("load", init, false);
