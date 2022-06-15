@@ -15,7 +15,7 @@ cam_sockets = []
 
 def send_all(msg):
     for ws in cam_sockets:
-        ws.write_message(msg, True)
+        ws.write_message(msg)
 
 class HTTPServer(tornado.web.RequestHandler):
     def get(self):
@@ -40,8 +40,8 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             os.system('libcamera-still -o preview.jpg --width 640 --height 480 -n --immediate')
         else:
             os.system('libcamera-still -o preview.jpg --width 320 --height 240 -n --immediate')
-        send_all('image captured')
-        
+        send_all(str('image captured'))
+
     def on_close(self):
         global cam_sockets
         cam_sockets.remove(self)
