@@ -35,13 +35,18 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
         print('new camera connection')
 
     def on_message(self, message):
-        print (message)
-        if str(message) == 'large':
-            print('large capture')
-            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 640 --height 480 -n --immediate')
-        else:
-            print('small small capture')
-            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 320 --height 240 -n --immediate')
+        #print (message)
+        match message:
+            case 'large':
+                print('large capture')
+                os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 640 --height 480 -n --immediate')
+            case 'small':
+                print('small small capture')
+                os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 320 --height 240 -n --immediate')
+            case 'capture_raw':
+                list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
+                number_files = len(list)+1        
+                os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+number_files+'.dng -r -n --immediate')
         send_all(str('image captured'))
 
     def on_close(self):
@@ -67,7 +72,8 @@ if __name__ == "__main__":
     cam_app = tornado.web.Application([
         (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
-        (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'})       
+        (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'})
+        (r"/(milligram.min.css)", tornado.web.StaticFileHandler, {'path':'./'})        
     ])
     start_server(cam_app)
 
