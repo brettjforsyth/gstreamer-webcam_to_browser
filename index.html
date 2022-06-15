@@ -17,7 +17,7 @@
   const reloadImg = url =>
   fetch(url, { cache: 'reload', mode: 'no-cors' })
   .then(response => {
-    //console.log('fetch ', response)
+    console.log('fetch ', response)
     //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
     document.getElementById("preview").src=response.url;
     updateImage();
@@ -123,7 +123,7 @@
 <h2>WebSocket Test</h2>
 <p><input type="submit" class="button" name="basic" value="Basic Query"></p>
 <p><input type="submit" class="button" name="advanced" value="Advanced Query"></p>
-<div id="output"><img id="preview" src="preview.jpg"/></div>
+<div id="output"><img id="preview" src=""/></div>
 </body>
 
 </html>

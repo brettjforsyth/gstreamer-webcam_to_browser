@@ -23,6 +23,7 @@ def post(self):
 
     elif self.get_argument('advanced', None) is not None:
         self.write('Advanced Query')
+        
 def start_server(cam_app):
     cam_server = tornado.httpserver.HTTPServer(cam_app)
     
