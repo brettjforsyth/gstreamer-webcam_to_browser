@@ -34,7 +34,7 @@
       //     sendCommand('small');
       //     size = 0
       //   }
-      setTimeout(sendCommand('small'),1000);
+      //sendCommand('small');
     }
     )
 
@@ -52,16 +52,17 @@
       
       //window.setTimeout(sendCommandVector, 1000);
       document.getElementById("preview_btn").onclick = function(){
-       
-        if(!preview_on){
-          console.log('start preview')
-          preview_on = true
-          document.getElementById("preview_btn").innerHTML = "Stop Preview"
-          updateImage()
-        }else{
-          preview_on = false
-          document.getElementById("preview_btn").innerHTML = "Start Preview"
-        }
+        document.getElementById("preview_btn").innerHTML = "Stop Preview"
+        updateImage()
+        // if(!preview_on){
+        //   console.log('start preview')
+        //   preview_on = true
+        //   document.getElementById("preview_btn").innerHTML = "Stop Preview"
+        //   updateImage()
+        // }else{
+        //   preview_on = false
+        //   document.getElementById("preview_btn").innerHTML = "Start Preview"
+        // }
       };
       document.getElementById("capture_btn").onclick = function(){
         sendCommand('capture_raw')
@@ -163,9 +164,7 @@
 
     function updateImage()
     {
-        //reloadImg('preview.jpg')
-        document.getElementById("preview").src="preview.jpg?d="+Date.now();
-        setTimeout(sendCommand('small'),1000);
+        reloadImg('preview.jpg')
     }
    
 
@@ -176,7 +175,7 @@
 </head>
 <body>
 <p><img id="preview" src="" width="640"/></p>
-<p><button class="button button-outline" id="preview_btn">Start Preview</button> <button class="button button-outline" id="capture_btn">Capture RAW Image</button></p>
+<p><button class="button button-outline" id="preview_btn">Get Preview</button> <button class="button button-outline" id="capture_btn">Capture RAW Image</button></p>
 
 <h3>LED Control</h3>
 <p>
