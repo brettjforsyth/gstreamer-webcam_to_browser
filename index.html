@@ -97,8 +97,8 @@
       
     }
     function setLEDButtonStatus(num){
-      document.getElementById("led_"+active_led).classList.remove('is-active')
-      document.getElementById("led_"+num).classList.add('is-active')
+      document.getElementById("led_"+active_led).classList.remove('is-dark')
+      document.getElementById("led_"+num).classList.add('is-dark')
       active_led = num
     }
     function sendCommand(cmd) {
@@ -196,7 +196,7 @@
 
 <h3>LED Control</h3>
 <p>
-  <button class="button is-loading is-active" id="led_0">LEDs Off</button>
+  <button class="button is-loading is-dark" id="led_0">LEDs Off</button>
   <button class="button is-loading" id="led_1">1</button>
   <button class="button is-loading" id="led_2">2</button>
   <button class="button is-loading" id="led_3">3</button>
