@@ -85,7 +85,6 @@
       }
 
       testWebSocket();
-      sendCommand('small');
       console.log('init')
       
     }
@@ -93,7 +92,7 @@
     function sendCommand(cmd) {
       if (cam_socket.readyState == 1) {
 
-        console.log("SENDING");
+        //console.log("SENDING");
         cam_socket.send(cmd)
         
       }else {
@@ -143,9 +142,10 @@
     function onMessage(evt)
     {
       if(preview_on){
+        console.log('onmessage')
         updateImage() 
       }
-      console.log(evt);
+      //console.log(evt);
     }
 
     function onError(evt)
@@ -173,8 +173,8 @@
   </script>
 </head>
 <body>
-  <div id="output"><img id="preview" src="" width="640"/></div>
-<p><a class="button" href="#" id="preview_btn">Start Preview</a> <a class="button" href="#" id="capture_btn">Capture RAW Image</a></p>
+<p><img id="preview" src="" width="640"/></p>
+<p><button class="button button-outline" id="preview_btn">Start Preview</button> <button class="button button-outline" id="capture_btn">Capture RAW Image</button></p>
 
 <h3>LED Control</h3>
 <p>
@@ -185,6 +185,7 @@
   <button class="button button-outline" id="led_4">4</button>
 
 </p>
+<div id="output"></div>
 </body>
 
 </html>
