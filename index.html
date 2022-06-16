@@ -66,6 +66,24 @@
       document.getElementById("capture_btn").onclick = function(){
         sendCommand('capture_raw')
       };
+
+
+      document.getElementById("led_off").onclick = function(){
+        sendCommand('led_off')
+      }
+      document.getElementById("led_1").onclick = function(){
+        sendCommand('led_1')
+      }
+      document.getElementById("led_2").onclick = function(){
+        sendCommand('led_2')
+      }
+      document.getElementById("led_3").onclick = function(){
+        sendCommand('led_3')
+      }
+      document.getElementById("led_4").onclick = function(){
+        sendCommand('led_4')
+      }
+
       testWebSocket();
       sendCommand('small');
       console.log('init')
@@ -158,6 +176,15 @@
   <div id="output"><img id="preview" src="" width="640"/></div>
 <p><a class="button" href="#" id="preview_btn">Start Preview</a> <a class="button" href="#" id="capture_btn">Capture RAW Image</a></p>
 
+<h3>LED Control</h3>
+<p>
+  <button class="button button-outline" id="led_off">LEDs Off</button>
+  <button class="button button-outline" id="led_1">1</button>
+  <button class="button button-outline" id="led_2">2</button>
+  <button class="button button-outline" id="led_3">3</button>
+  <button class="button button-outline" id="led_4">4</button>
+
+</p>
 </body>
 
 </html>

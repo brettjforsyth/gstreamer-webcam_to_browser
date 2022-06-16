@@ -10,8 +10,14 @@ gi.require_version('Gst', '1.0')
 from gi.repository import Gst, GObject
 import json
 import signal
+import RPi.GPIO as GPIO
 
 cam_sockets = []
+
+led1Pin = 6 
+led2Pin = 13 
+led3Pin = 19 
+led4Pin = 26 
 
 def send_all(msg):
     for ws in cam_sockets:
@@ -46,6 +52,32 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --immediate')
+        elif message == 'led_off':
+            GPIO.output(led1Pin, GPIO.LOW)
+            GPIO.output(led2Pin, GPIO.LOW)
+            GPIO.output(led3Pin, GPIO.LOW)
+            GPIO.output(led4Pin, GPIO.LOW)
+        elif message == 'led_1':
+            GPIO.output(led1Pin, GPIO.HIGH)
+            GPIO.output(led2Pin, GPIO.LOW)
+            GPIO.output(led3Pin, GPIO.LOW)
+            GPIO.output(led4Pin, GPIO.LOW)
+        elif message == 'led_2':
+            GPIO.output(led1Pin, GPIO.HIGH)
+            GPIO.output(led2Pin, GPIO.HIGH)
+            GPIO.output(led3Pin, GPIO.LOW)
+            GPIO.output(led4Pin, GPIO.LOW)
+        elif message == 'led_3':
+            GPIO.output(led1Pin, GPIO.HIGH)
+            GPIO.output(led2Pin, GPIO.HIGH)
+            GPIO.output(led3Pin, GPIO.HIGH)
+            GPIO.output(led4Pin, GPIO.LOW)
+        elif message == 'led_4':
+            GPIO.output(led1Pin, GPIO.HIGH)
+            GPIO.output(led2Pin, GPIO.HIGH)
+            GPIO.output(led3Pin, GPIO.HIGH)
+            GPIO.output(led4Pin, GPIO.HIGH)
+            
         send_all(str('image captured'))
 
     def on_close(self):
@@ -67,7 +99,16 @@ def start_server(cam_app):
 if __name__ == "__main__":
 
     #init_motors()
-
+    GPIO.setmode(GPIO.BCM) # Broadcom pin-numbering scheme
+    GPIO.setup(led1Pin, GPIO.OUT) # LED pin set as output
+    GPIO.setup(led2Pin, GPIO.OUT) # LED pin set as output
+    GPIO.setup(led3Pin, GPIO.OUT) # LED pin set as output
+    GPIO.setup(led4Pin, GPIO.OUT) # LED pin set as output
+    GPIO.output(led1Pin, GPIO.LOW)
+    GPIO.output(led2Pin, GPIO.LOW)
+    GPIO.output(led3Pin, GPIO.LOW)
+    GPIO.output(led4Pin, GPIO.LOW)
+    
     cam_app = tornado.web.Application([
         (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
