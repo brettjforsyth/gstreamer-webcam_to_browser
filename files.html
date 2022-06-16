@@ -13,32 +13,32 @@
   </script>
 </head>
 <body>
-  <section class="section">
     <div class="container">
-      <h2 class="title">JPEGs</h2>
+      <div class="content p-3">
+        <h2 class="title">JPEGs</h2>
 
-      {% import sys, os%}
-      <div class="columns is-multiline is-mobile">
-      {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs') %}
+        {% import sys, os%}
+        <div class="columns is-multiline is-mobile">
+        {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs') %}
 
-        <div class="column">
-            <a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
-              <figure class="image is-128x128">
-                <img alt="{{ f }}" src="lores_images/thumbs/{{ f }}" width="160" height="120">
-              </figure>
-          </a>
-        </div>
-          
-      {% end %}
-      </div>
-      <h2 class="title">RAW</h2>
-      <p>
-        {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') %}
-        <a download="{{ f }}" href="hires_images/{{ f }}" title="{{ f }}">{{ f }}</a>
+          <div class="column">
+              <a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
+                <figure class="image is-128x128">
+                  <img alt="{{ f }}" src="lores_images/thumbs/{{ f }}" width="160" height="120">
+                </figure>
+            </a>
+          </div>
+            
         {% end %}
-      </p>
+        </div>
+        <h2 class="title">RAW</h2>
+        <p>
+          {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') %}
+          <a download="{{ f }}" href="hires_images/{{ f }}" title="{{ f }}">{{ f }}</a>
+          {% end %}
+        </p>
+      </div>
     </div>
-  </section>
 </body>
 
 </html>
