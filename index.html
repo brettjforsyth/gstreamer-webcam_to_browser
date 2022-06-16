@@ -154,7 +154,7 @@
 
     function onClose(evt)
     {
-      writeToScreen("WS DISCONNECTED");
+      writeToScreen("Camera disconnected refresh the page");
     }
 
     function onMessage(evt)
@@ -191,20 +191,24 @@
   </script>
 </head>
 <body>
-<p><img id="preview" src="" width="640"/></p>
-<p><button class="button is-loading" id="preview_btn">Get Preview</button> <button class="button is-loading" id="capture_btn">Capture RAW Image</button></p>
+  <section class="section">
+    <div class="container">
+      <p><img id="preview" src="" width="640"/></p>
+      <p><button class="button is-loading" id="preview_btn">Get Preview</button> <button class="button is-loading" id="capture_btn">Capture RAW Image</button></p>
 
-<h3 class="title">LED Control</h3>
-<p>
-  <button class="button is-loading is-dark" id="led_0">LEDs Off</button>
-  <button class="button is-loading" id="led_1">1</button>
-  <button class="button is-loading" id="led_2">2</button>
-  <button class="button is-loading" id="led_3">3</button>
-  <button class="button is-loading" id="led_4">4</button>
+      <h3 class="title">LED Control</h3>
+      <p>
+        <button class="button is-loading is-dark" id="led_0">LEDs Off</button>
+        <button class="button is-loading" id="led_1">1</button>
+        <button class="button is-loading" id="led_2">2</button>
+        <button class="button is-loading" id="led_3">3</button>
+        <button class="button is-loading" id="led_4">4</button>
 
-</p>
-<p><a href="/files">Download Files</a></p>
-<div id="output"></div>
+      </p>
+      <p><a href="/files" class="button">Download Files</a></p>
+      <p id="output"></p>
+    </div>
+  </section>
 </body>
 
 </html>
