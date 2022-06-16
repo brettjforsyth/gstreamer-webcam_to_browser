@@ -47,11 +47,11 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 640 --height 480 -n --immediate')
         elif message == 'small':
             print('small small capture')
-            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n --flush -q 20 --immediate --autofocus')
+            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n --flush -q 20 --autofocus')
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
-            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --immediate')
+            os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus')
         elif message == 'led_off':
             GPIO.output(led1Pin, GPIO.LOW)
             GPIO.output(led2Pin, GPIO.LOW)
@@ -108,7 +108,7 @@ if __name__ == "__main__":
     GPIO.output(led2Pin, GPIO.LOW)
     GPIO.output(led3Pin, GPIO.LOW)
     GPIO.output(led4Pin, GPIO.LOW)
-    
+
     cam_app = tornado.web.Application([
         (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
