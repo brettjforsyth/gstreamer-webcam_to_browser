@@ -49,13 +49,13 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
         elif message == 'small':
             print('captured')
             #os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus')
-            subprocess.run(["libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus"], capture_output=True)
+            subprocess.run(["sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus"], capture_output=True)
             send_all(str('preview captured'))
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
             #os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus')
-            subprocess.run(["libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus"], capture_output=True)
+            subprocess.run(["sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_"+str(number_files)+".dng -r -n --autofocus"], capture_output=True)
             send_all(str('raw captured'))
         elif message == 'led_off':
             GPIO.output(led1Pin, GPIO.LOW)
