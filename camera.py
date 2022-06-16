@@ -29,7 +29,7 @@ def send_all(msg):
 class HTTPServer(tornado.web.RequestHandler):
     def get(self):
         self.render("index.html")
-class HTTPServer(tornado.web.RequestHandler):
+class HTTPServer2(tornado.web.RequestHandler):
     def get(self):
         self.render("files.html")
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
     cam_app = tornado.web.Application([
         (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
-        (r'/files', HTTPServer),
+        (r'/files', HTTPServer2),
         (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'}),
         (r"/(bulma.min.css)", tornado.web.StaticFileHandler, {'path':'./'})        
     ])
