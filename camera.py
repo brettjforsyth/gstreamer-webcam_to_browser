@@ -5,9 +5,6 @@ import threading
 import time
 import base64
 import sys, os
-import gi
-gi.require_version('Gst', '1.0')
-from gi.repository import Gst, GObject
 import json
 import signal
 import RPi.GPIO as GPIO
