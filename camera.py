@@ -46,7 +46,7 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             print('large capture')
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 640 --height 480 -n --immediate')
         elif message == 'small':
-            print('small small capture')
+            print('captured')
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus')
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path

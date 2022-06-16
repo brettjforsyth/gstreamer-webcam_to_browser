@@ -142,10 +142,9 @@
 
     function onMessage(evt)
     {
-      // if(preview_on){
-      //   console.log('onmessage')
-      //   updateImage() 
-      // }
+      if(evt.data == "captured"){
+        reloadImg('preview.jpg') 
+      }
       //console.log(evt);
     }
 
@@ -164,7 +163,7 @@
 
     function updateImage()
     {
-        reloadImg('preview.jpg')
+       sendCommand('small')
     }
    
 
