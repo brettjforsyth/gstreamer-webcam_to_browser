@@ -17,12 +17,17 @@
 <h2 class="title">JPEGs</h3>
 
 {% import sys, os%}
+<div class="columns is-multiline is-mobile">
 {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs') %}
-    <p><a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
-      <img alt="{{ f }}" src="lores_images/{{ f }}">
-  </a></p>
+
+  <div class="column">
+      <p><a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
+        <img alt="{{ f }}" src="lores_images/thumbs/{{ f }}">
+    </a></p>
+  </div>
     
 {% end %}
+</div>
 <h2 class="title">RAW</h3>
 
 </body>
