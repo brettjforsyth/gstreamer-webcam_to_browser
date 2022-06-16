@@ -53,7 +53,7 @@
       
       //window.setTimeout(sendCommandVector, 1000);
       document.getElementById("preview_btn").onclick = function(){
-        this.setAttribute('is-loading','')
+        this.classList.add('is-loading')
         //document.getElementById("preview_btn").innerHTML = "Stop Preview"
         updateImage()
         // if(!preview_on){
