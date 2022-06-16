@@ -32,7 +32,10 @@
 {% end %}
 </div>
 <h2 class="title">RAW</h2>
-</div>
+  {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') %}
+  <a download="{{ f }}" href="hires_images/{{ f }}" title="{{ f }}">{{ f }}</a>
+  {% end %}
+
 </section>
 </body>
 
