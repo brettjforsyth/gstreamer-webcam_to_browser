@@ -135,10 +135,12 @@
     {
       writeToScreen("WS CONNECTED");
       //updateImage();
-      let div = document.getElementsByTagName('button');
+      let btns = document.getElementsByTagName('button');
 
       // removing the class
-      div.classList.remove('active');
+      for (let btn of btns) {
+        btn.classList.remove('is-loading');
+      }
     }
 
     function onClose(evt)
