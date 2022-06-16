@@ -22,10 +22,11 @@
 {% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs') %}
 
   <div class="column">
-      <p><a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
-        <figure class="image is-128x128"></figure>
-        <img alt="{{ f }}" src="lores_images/thumbs/{{ f }}" width="160" height="120">
-    </a></p>
+      <a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
+        <figure class="image is-128x128">
+          <img alt="{{ f }}" src="lores_images/thumbs/{{ f }}" width="160" height="120">
+        </figure>
+    </a>
   </div>
     
 {% end %}
