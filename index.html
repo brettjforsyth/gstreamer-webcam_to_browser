@@ -163,7 +163,9 @@
 
     function updateImage()
     {
-        reloadImg('preview.jpg')
+        //reloadImg('preview.jpg')
+        document.getElementById("preview").src="preview.jpg?d="+Date.now();
+        setTimeout(sendCommand('small'),1000);
     }
    
 
