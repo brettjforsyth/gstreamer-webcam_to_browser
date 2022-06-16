@@ -13,6 +13,7 @@ import signal
 import RPi.GPIO as GPIO
 import subprocess
 import shlex
+from PIL import Image
 
 cam_sockets = []
 
@@ -48,15 +49,20 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             print('large capture')
             os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 640 --height 480 -n --immediate')
         elif message == 'small':
-            print('captured')
+            list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images') # dir is your directory path
+            number_files = len(list)+1
             #os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus')
-            subprocess.run(shlex.split("sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg --width 2328 --height 1748 -n -q 50 --autofocus"))
+            subprocess.run(shlex.split("sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/lores_images/image_"+str(number_files)+".jpg --width 2328 --height 1748 -n -q 50 --autofocus"))
+            image = Image.open('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/image_'+str(number_files)+'.jpg')
+            new_image = image.resize((640, 480))
+            new_image.save('/home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg')
             send_all(str('preview captured'))
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
             #os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus')
             subprocess.run(shlex.split("sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_"+str(number_files)+".dng -r -n --autofocus"))
+            
             send_all(str('raw captured'))
         elif message == 'led_off':
             GPIO.output(led1Pin, GPIO.LOW)
