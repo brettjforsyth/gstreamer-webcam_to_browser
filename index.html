@@ -24,9 +24,9 @@
     const reloadImg = url =>
     fetch(url, { cache: 'no-cache', mode: 'no-cors' })
     .then(response => {
-      //console.log('fetch ', response)
+      console.log('fetch ', response)
       //document.body.querySelectorAll('img[src="${url}"]').forEach(img => img.src = url)
-      document.getElementById("preview").src=response.url;
+      document.getElementById("preview").src=response.url+"?t="+Date.now();
       // if(size == 0){
       //     size = 1
       //     sendCommand('large');
