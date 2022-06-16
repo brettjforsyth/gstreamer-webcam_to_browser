@@ -52,7 +52,7 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
             number_files = len(list)+1        
-            //os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus')
+            #os.system('sudo libcamera-still -o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus')
             subprocess.run(["libcamera-still", '-o /home/brett/Documents/gstreamer-webcam_to_browser/hires_images/image_'+str(number_files)+'.dng -r -n --autofocus'], capture_output=True)
         elif message == 'led_off':
             GPIO.output(led1Pin, GPIO.LOW)
