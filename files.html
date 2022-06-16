@@ -14,14 +14,16 @@
 <body>
 
 
-<h3>JPEGs</h3>
+<h2 class="title">JPEGs</h3>
 
 {% import sys, os%}
-{% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images') %}
-    <p>{{ f }}</p>
+{% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs') %}
+    <p><a download="{{ f }}" href="lores_images/{{ f }}" title="{{ f }}">
+      <img alt="{{ f }}" src="lores_images/{{ f }}">
+  </a></p>
     
 {% end %}
-<h3>RAW</h3>
+<h2 class="title">RAW</h3>
 
 </body>
 

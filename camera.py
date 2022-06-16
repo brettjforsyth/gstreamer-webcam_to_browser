@@ -59,6 +59,8 @@ class CamWSHandler(tornado.websocket.WebSocketHandler):
             image = Image.open('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/image_'+str(number_files)+'.jpg')
             new_image = image.resize((640, 480))
             new_image.save('/home/brett/Documents/gstreamer-webcam_to_browser/preview.jpg')
+            new_image = image.resize((320, 240))
+            new_image.save('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images/thumbs/image_'+str(number_files)+'.jpg')
             send_all(str('preview captured'))
         elif message == 'capture_raw':
             list = os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/hires_images') # dir is your directory path
