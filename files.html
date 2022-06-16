@@ -15,9 +15,9 @@
 
 
 <h3>JPEGs</h3>
-{%
-  import sys, os
-  for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images'): %}
+
+{% import sys, os%}
+{% for f in os.listdir('/home/brett/Documents/gstreamer-webcam_to_browser/lores_images') %}
     <p>{{ f }}</p>
     
 {% end %}
