@@ -19,7 +19,7 @@
     let size  = 0
     // ws.onmessage = function(evt){
     var preview_on = false
-
+    var active_led =0
 
     const reloadImg = url =>
     fetch(url, { cache: 'no-cache', mode: 'no-cors' })
@@ -35,7 +35,7 @@
       //     size = 0
       //   }
       //sendCommand('small');
-      document.getElementById("preview_btn").removeAttribute('disabled')
+      document.getElementById("preview_btn").classList.remove('is-loading')
     }
     )
 
@@ -53,7 +53,7 @@
       
       //window.setTimeout(sendCommandVector, 1000);
       document.getElementById("preview_btn").onclick = function(){
-        this.setAttribute('disabled','')
+        this.setAttribute('is-loading','')
         //document.getElementById("preview_btn").innerHTML = "Stop Preview"
         updateImage()
         // if(!preview_on){
@@ -71,19 +71,24 @@
       };
 
 
-      document.getElementById("led_off").onclick = function(){
+      document.getElementById("led_0").onclick = function(){
+        setLEDButtonStatus(0)
         sendCommand('led_off')
       }
       document.getElementById("led_1").onclick = function(){
+        setLEDButtonStatus(1)
         sendCommand('led_1')
       }
       document.getElementById("led_2").onclick = function(){
+        setLEDButtonStatus(2)
         sendCommand('led_2')
       }
       document.getElementById("led_3").onclick = function(){
+        setLEDButtonStatus(3)
         sendCommand('led_3')
       }
       document.getElementById("led_4").onclick = function(){
+        setLEDButtonStatus(4)
         sendCommand('led_4')
       }
 
@@ -91,7 +96,11 @@
       console.log('init')
       
     }
-
+    function setLEDButtonStatus(num){
+      document.getElementById("led_"+active_led).classList.remove('is-active')
+      document.getElementById("led_"+num).classList.add('is-active')
+      active_led = num
+    }
     function sendCommand(cmd) {
       if (cam_socket.readyState == 1) {
 
@@ -187,7 +196,7 @@
 
 <h3>LED Control</h3>
 <p>
-  <button class="button is-loading is-active" id="led_off">LEDs Off</button>
+  <button class="button is-loading is-active" id="led_0">LEDs Off</button>
   <button class="button is-loading" id="led_1">1</button>
   <button class="button is-loading" id="led_2">2</button>
   <button class="button is-loading" id="led_3">3</button>
