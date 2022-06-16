@@ -131,6 +131,7 @@ if __name__ == "__main__":
         (r'/', HTTPServer),
         (r'/files', HTTPServer2),
         (r'/lores_images/(.*)', tornado.web.StaticFileHandler, {'path':'/home/brett/Documents/gstreamer-webcam_to_browser/lores_images'}),
+         (r'/hires_images/(.*)', tornado.web.StaticFileHandler, {'path':'/home/brett/Documents/gstreamer-webcam_to_browser/hires_images'}),
         (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'}),
         (r"/(bulma.min.css)", tornado.web.StaticFileHandler, {'path':'./'})        
     ])
