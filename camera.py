@@ -119,7 +119,7 @@ if __name__ == "__main__":
         (r'/ws', CamWSHandler),
         (r'/', HTTPServer),
         (r"/(preview.jpg)", tornado.web.StaticFileHandler, {'path':'./'}),
-        (r"/(milligram.min.css)", tornado.web.StaticFileHandler, {'path':'./'})        
+        (r"/(bulma.min.css)", tornado.web.StaticFileHandler, {'path':'./'})        
     ])
     start_server(cam_app)
 
