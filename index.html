@@ -68,6 +68,7 @@
         // }
       };
       document.getElementById("capture_btn").onclick = function(){
+        this.classList.add('is-loading')
         sendCommand('capture_raw')
       };
 
@@ -94,6 +95,7 @@
       }
 
       testWebSocket();
+      sendCommand('led_off')
       console.log('init')
       
     }
@@ -164,6 +166,9 @@
         console.log('preview captured')
         reloadImg('preview.jpg') 
       }
+      if(evt.data == "raw captured"){
+        document.getElementById("capture_btn").classList.remove('is-loading')
+      }
       //console.log(evt);
     }
 
@@ -182,7 +187,7 @@
 
     function updateImage()
     {
-       sendCommand('small')
+       sendCommand('s')
     }
    
 

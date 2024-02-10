@@ -15,6 +15,10 @@ cam_sockets = []
 key_sockets = []
 
 frame_grabber = None
+led1Pin = 6 
+led2Pin = 13 
+led3Pin = 19 
+led4Pin = 26 
 
 #import Adafruit_BBIO.GPIO as GPIO
 #import Adafruit_BBIO.PWM as PWM
